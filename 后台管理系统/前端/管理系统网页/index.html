@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDU论坛后台管理系统</title>
+    <!-- CSS 文件 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/comment.css">
+    <link rel="stylesheet" href="css/tag.css">
+    <link rel="stylesheet" href="css/feedback.css">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <div id="loader" class="loader" style="display: none;">
+        <div class="loader-spinner"></div>
+    </div>
+</head>
+
+<body>
+    <div id="loader" class="loader" style="display: none;">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>管理员登录</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">账号</label>
+                    <input type="text" id="username" name="account" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container" style="display: none;">
+        <!-- 侧边导航栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SDU论坛管理</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active" data-target="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>控制面板</span>
+                </li>
+                <li class="menu-section">用户管理</li>
+                <li class="menu-item" data-target="user-list">
+                    <i class="fas fa-users"></i>
+                    <span>用户列表</span>
+                </li>
+                <li class="menu-item" data-target="blacklist">
+                    <i class="fas fa-ban"></i>
+                    <span>黑名单管理</span>
+                </li>
+                <li class="menu-section">内容管理</li>
+                <li class="menu-item" data-target="post-manage">
+                    <i class="fas fa-newspaper"></i>
+                    <span>帖子管理</span>
+                </li>
+                <li class="menu-item" data-target="comment-manage">
+                    <i class="fas fa-comments"></i>
+                    <span>评论管理</span>
+                </li>
+                <li class="menu-section">数据分析</li>
+                <li class="menu-item" data-target="tag-statistic">
+                    <i class="fas fa-tags"></i>
+                    <span>标签统计</span>
+                </li>
+                <li class="menu-item" data-target="feedback-manage">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>反馈管理</span>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>退出登录</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">控制面板</h1>
+                </div>
+                <div class="header-right">
+                    <span class="user-info">
+                        <img src="../assets/images/manage_avatar.png" alt="管理员头像" class="user-avatar">
+                        <span>管理员</span>
+                    </span>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- 动态内容将在这里加载 -->
+                <div id="dashboard-content" class="page-content active">
+                    <div class="dashboard-container">
+                        <h2 class="section-title">数据概览</h2>
+                        <div id="dashboard-stats" class="stats-grid"></div>
+                
+                        <div class="dashboard-row">
+                            <div class="dashboard-col">
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3>今日新帖</h3>
+                                        <a href="#" class="view-all" data-target="post-manage">查看全部</a>
+                                    </div>
+                                    <div id="today-posts-list" class="card-body"></div>
+                                </div>
+                            </div>
+                
+                            <div class="dashboard-col">
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3>最新反馈</h3>
+                                        <a href="#" class="view-all" data-target="feedback-manage">查看全部</a>
+                                    </div>
+                                    <div id="recent-feedbacks" class="card-body"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="user-list-content" class="page-content">
+                    <div class="user-manage-container">
+                        <h2 class="section-title">用户列表</h2>
+                
+                        <div class="user-search-box">
+                            <form id="user-search-form">
+                                <div class="search-input-group">
+                                    <input type="text" placeholder="输入用户ID搜索..." class="search-input">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> 搜索
+                                    </button>
+                                    <button type="button" id="reset-search-btn" class="btn btn-secondary">
+                                        <i class="fas fa-sync-alt"></i> 重置
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div id="user-list-container" class="user-list"></div>
+                
+                        <div id="user-pagination" class="pagination"></div>
+                    </div>
+                </div>
+                <!-- 自定义模态框 -->
+                <div id="custom-modal" class="modal">
+                    <div class="modal-content" id="custom-modal-content"></div>
+                </div>
+                
+
+                <div id="blacklist-content" class="page-content">
+                    <div class="blacklist-container">
+                        <h2 class="section-title">黑名单管理</h2>
+                
+                        <div class="blacklist-stats-card">
+                            <h3><i class="fas fa-chart-pie"></i> 黑名单原因统计</h3>
+                            <div id="blacklist-stats" class="stats-container"></div>
+                        </div>
+                
+                        <div class="blacklist-list-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-list"></i> 黑名单列表</h3>
+                                <div class="header-actions">
+                                    <button id="refresh-blacklist" class="btn btn-sm">
+                                        <i class="fas fa-sync-alt"></i> 刷新
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="blacklist-container" class="card-body"></div>
+                            <div id="blacklist-pagination" class="pagination"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="post-manage-content" class="page-content">
+                    <div class="post-manage-container">
+                        <h2 class="section-title">帖子管理</h2>
+                
+                        <div class="post-view-tabs">
+                            <a href="#" class="post-view-tab active" data-view="all">
+                                <i class="fas fa-list"></i> 全部帖子
+                            </a>
+                            <a href="#" class="post-view-tab" data-view="today">
+                                <i class="fas fa-calendar-day"></i> 今日新帖
+                            </a>
+                        </div>
+                
+                        <div class="post-search-box">
+                            <form id="post-search-form">
+                                <div class="search-input-group">
+                                    <input type="text" placeholder="输入用户ID或标签(以#开头)..." class="search-input">
+                                    <div id="search-type-hint" class="search-hint"></div>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> 搜索
+                                    </button>
+                                    <button type="button" id="reset-post-search-btn" class="btn btn-secondary">
+                                        <i class="fas fa-sync-alt"></i> 重置
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div id="post-list-container" class="post-list"></div>
+                
+                        <div id="post-pagination" class="pagination"></div>
+                    </div>
+                </div>
+
+                <div id="comment-manage-content" class="page-content">
+                    <div class="comment-manage-container">
+                        <h2 class="section-title">评论管理</h2>
+                
+                        <div id="comment-search-container" class="comment-search-box">
+                            <form id="comment-search-form">
+                                <div class="search-input-group">
+                                    <input type="text" placeholder="输入帖子ID搜索评论..." class="search-input">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> 搜索
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div id="comment-result-header" class="result-header" style="display: none;">
+                            <h3>帖子ID: <span id="current-post-id"></span> 的评论</h3>
+                            <button id="comment-back-btn" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> 返回
+                            </button>
+                        </div>
+                
+                        <div id="comment-list-container" class="comment-list"></div>
+                
+                        <div id="comment-pagination" class="pagination"></div>
+                    </div>
+                </div>
+
+                <div id="tag-statistic-content" class="page-content">
+                    <div class="tag-statistic-container">
+                        <h2 class="section-title">标签分析</h2>
+                
+                        <div class="tag-statistic-grid">
+                            <div class="tag-statistic-card">
+                                <div id="tag-statistics-container" class="card-body"></div>
+                            </div>
+                
+                            <div class="tag-statistic-card">
+                                <div id="hot-tags-container" class="card-body"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="feedback-manage-content" class="page-content">
+                    <div class="feedback-manage-container">
+                        <h2 class="section-title">用户反馈管理</h2>
+                
+                        <div class="feedback-search-box">
+                            <form id="feedback-search-form">
+                                <div class="search-input-group">
+                                    <input type="text" placeholder="输入用户ID搜索反馈..." class="search-input">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> 搜索
+                                    </button>
+                                    <button type="button" id="reset-feedback-search-btn" class="btn btn-secondary">
+                                        <i class="fas fa-sync-alt"></i> 重置
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div id="feedback-list-container" class="feedback-list"></div>
+                
+                        <div id="feedback-pagination" class="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+
+    <!-- JavaScript 文件 -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/userManager.js"></script>
+    <script src="js/postManager.js"></script>
+    <script src="js/commentManager.js"></script>
+    <script src="js/tagManager.js"></script>
+    <script src="js/feedbackManager.js"></script>
+</body>
+
+</html>

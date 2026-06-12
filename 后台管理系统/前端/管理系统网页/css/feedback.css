@@ -1,0 +1,70 @@
+/* feedback.css */
+.feedback-manage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feedback-search-box {
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-list {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.feedback-item {
+    padding: 20px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.3s;
+}
+
+.feedback-item:hover {
+    background-color: #f9f9f9;
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.feedback-user {
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.feedback-time {
+    color: #999;
+    font-size: 13px;
+}
+
+.feedback-content {
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-line;
+}
+
+.feedback-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .feedback-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .feedback-time {
+        align-self: flex-start;
+    }
+}

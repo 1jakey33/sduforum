@@ -1,0 +1,163 @@
+/* 标签分析样式 */
+.tag-statistic-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tag-statistic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tag-statistic-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.tag-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tag-stats-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.tag-stats-header i {
+    color: var(--primary-color);
+}
+
+.tag-stats-header span {
+    color: #666;
+    font-size: 14px;
+}
+
+.tag-stat-item {
+    margin-bottom: 15px;
+}
+
+.tag-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.tag-name {
+    font-weight: bold;
+    color: var(--dark-color);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.tag-name:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.tag-count {
+    color: #666;
+    font-size: 14px;
+}
+
+.tag-progress {
+    height: 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.tag-percent {
+    text-align: right;
+    color: #999;
+    font-size: 13px;
+}
+
+.hot-tags-header {
+    margin-bottom: 20px;
+}
+
+.hot-tags-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.hot-tags-header i {
+    color: var(--danger-color);
+}
+
+.hot-tags-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hot-tag-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.hot-tag-item:hover {
+    background-color: #f0f0f0;
+}
+
+.hot-tag-item .tag-name {
+    flex: 1;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.hot-tag-item .tag-usage {
+    margin-right: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.btn-view-posts {
+    padding: 3px 10px;
+    font-size: 13px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .tag-statistic-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hot-tag-item {
+        flex-wrap: wrap;
+    }
+
+    .hot-tag-item .tag-usage {
+        margin-right: 0;
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}

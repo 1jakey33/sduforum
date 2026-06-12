@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDU-Forum - 山东大学校园论坛</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --secondary-color: #1565c0;
+            --accent-color: #ff9800;
+            --light-color: #f5f5f5;
+            --dark-color: #212121;
+            --success-color: #4caf50;
+            --danger-color: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .slogan {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 3rem 0;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #fb8c00;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .screenshot {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot:hover img {
+            transform: scale(1.05);
+        }
+
+        .download-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .download-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-btn {
+            background-color: white;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .download-btn:hover {
+            background-color: #e3f2fd;
+            color: var(--secondary-color);
+        }
+
+        .auth-code-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .auth-code {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .auth-note {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">SDU-Forum</div>
+            <div class="slogan">山东大学校园社区，连接每一个SDUer</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>发现校园精彩，分享生活点滴</h1>
+                <p>SDU-Forum是专为山东大学师生打造的校园社区平台，提供二手交易、打听求助、社团活动、校园招聘和学习伙伴等多样化服务，让你的校园生活更加丰富多彩。</p>
+                <a href="#download" class="btn btn-accent">立即下载</a>
+            </div>
+            <div class="hero-image">
+                <img src="./img.jpg" alt="SDU-Forum应用截图">
+            </div>
+        </section>
+
+        <section>
+            <h2>核心功能</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>校园分类社区</h3>
+                    <p>五大分类满足不同需求：二手闲置、打听求助、社团活动、校园招聘和学习搭子，快速找到你需要的信息。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>安全认证登录</h3>
+                    <p>学号认证系统保障真实校园社区环境，PBKDF2加密算法保护你的账号安全。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>互动评论系统</h3>
+                    <p>多级评论结构，支持回复和点赞，让交流更加清晰有序。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>智能标签系统</h3>
+                    <p>灵活的标签管理，支持多标签组合搜索，快速定位相关内容。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>高效搜索功能</h3>
+                    <p>全文搜索和标签搜索相结合，快速找到你需要的信息。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>个性化资料</h3>
+                    <p>自定义头像、背景和个人信息，展现独特的校园身份。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="download" class="download-section">
+        <div class="download-container">
+            <h2>立即体验SDU-Forum</h2>
+            <p>加入山东大学最大的校园社区，发现更多校园精彩</p>
+            <a href="sdu-forum.apk" class="btn download-btn" download="SDU-Forum.apk">下载APK (v1.0.0)</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">支持Android 8.0及以上系统</p>
+
+            <div class="auth-code-box">
+                <h3>注册认证码</h3>
+                <div class="auth-code">sduforum</div>
+                <p class="auth-note">下载安装后，注册账号时需要输入此认证码</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">关于我们</a>
+                <a href="#">用户协议</a>
+                <a href="#">隐私政策</a>
+                <a href="#">联系我们</a>
+            </div>
+            <div class="copyright">© 2023 SDU-Forum 山东大学校园论坛 版权所有</div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+/* 评论管理样式 */
+.comment-manage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.comment-search-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-header h3 {
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.comment-list {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.comment-card {
+    padding: 20px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.3s;
+}
+
+.comment-card:hover {
+    background-color: #f9f9f9;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--dark-color);
+    font-weight: bold;
+}
+
+.comment-author i {
+    font-size: 20px;
+    color: #666;
+}
+
+.comment-time {
+    color: #999;
+    font-size: 13px;
+}
+
+.comment-content {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-likes {
+    color: #999;
+    font-size: 14px;
+}
+
+.comment-likes i {
+    margin-right: 5px;
+    color: var(--primary-color);
+}
+
+.comment-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.comment-reply-to {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+    color: #999;
+    font-size: 13px;
+}
+
+.comment-reply-to i {
+    margin-right: 5px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .result-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .comment-time {
+        margin-left: 30px;
+    }
+}
